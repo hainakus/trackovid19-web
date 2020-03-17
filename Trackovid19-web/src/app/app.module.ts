@@ -13,6 +13,10 @@ import { HomeComponent } from './screens/home/home.component';
 import { LoginComponent } from './screens/login/login.component';
 import { ChangeStateComponent } from './screens/change-state/change-state.component';
 import { MainComponent } from './screens/main/main.component';
+import { GeolocalizationService } from './shared/services/geolocalization.service';
+import { HttpClientModule } from '@angular/common/http';
+import { OnBoardingModule } from './screens/onboarding/onboarding.module';
+
 
 @NgModule({
   declarations: [
@@ -20,17 +24,27 @@ import { MainComponent } from './screens/main/main.component';
     HomeComponent,
     LoginComponent,
     ChangeStateComponent,
-    MainComponent
+    MainComponent,
+  
+
+
   ],
   imports: [
     BrowserModule,
+    
     AppRoutingModule,
     FlexLayoutModule,
+    OnBoardingModule,
     SharedModule,
+    HttpClientModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
-    AkitaNgRouterStoreModule.forRoot()
+    AkitaNgRouterStoreModule.forRoot(),
+    
   ],
-  providers: [{ provide: NG_ENTITY_SERVICE_CONFIG, useValue: { baseUrl: 'https://jsonplaceholder.typicode.com' }}],
+  providers: [
+    // GeolocalizationService,
+    { provide: NG_ENTITY_SERVICE_CONFIG, useValue: { baseUrl: environment.apiUrl }}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
